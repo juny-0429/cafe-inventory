@@ -1,30 +1,36 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>카페 기물 찾기</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>카페 기물 지도</title>
 
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <!-- Pretendard 폰트 -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+    />
 
-<div class="container">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-    <h1>☕ 카페 기물 찾기</h1>
+  <body>
+    <div class="container">
+      <h1>☕ 카페 기물 지도</h1>
 
-    <input
+      <input
         id="search"
         type="text"
-        placeholder="물품명을 입력하세요 (예: 컵, 냅킨, 우유...)">
+        placeholder="물품명을 입력하세요 (예: 컵, 냅킨, 우유)"
+      />
 
-    <div id="searchResult" class="result"></div>
+      <div id="searchResult" class="result"></div>
 
-    <div id="locationView" class="grid"></div>
+      <div id="locationView" class="grid"></div>
+    </div>
 
-</div>
-
-<script src="script.js"></script>
-
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
