@@ -21,7 +21,7 @@ function drawLocations() {
   for (const location in inventory) {
     html += `
       <div class="card">
-        <h2>${location}</h2>
+        <h2>📍 ${location}</h2>
 
         <ul>
           ${inventory[location].map((item) => `<li>${item}</li>`).join("")}
