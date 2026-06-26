@@ -2,51 +2,47 @@ const search = document.getElementById("search");
 const result = document.getElementById("searchResult");
 const locationView = document.getElementById("locationView");
 
-let items = [];
+const items = [];
 
-async function loadData() {
-  const response = await fetch("data.json");
-  items = await response.json();
-
-  drawLocations();
+// inventory를 검색용 배열로 변환
+for (const location in inventory) {
+  inventory[location].forEach((name) => {
+    items.push({
+      name,
+      location,
+    });
+  });
 }
 
+// 위치별 카드 출력
 function drawLocations() {
-  const locations = {};
-
-  items.forEach((item) => {
-    if (!locations[item.location]) {
-      locations[item.location] = [];
-    }
-
-    locations[item.location].push(item.name);
-  });
-
   let html = "";
 
-  for (const location in locations) {
+  for (const location in inventory) {
     html += `
-        <div class="card">
-            <h2>📍 ${location}</h2>
-            <ul>
-                ${locations[location]
-                  .map((name) => `<li>${name}</li>`)
-                  .join("")}
-            </ul>
-        </div>
-        `;
+      <div class="card">
+        <h2>${location}</h2>
+
+        <ul>
+          ${inventory[location].map((item) => `<li>${item}</li>`).join("")}
+        </ul>
+      </div>
+    `;
   }
 
   locationView.innerHTML = html;
 }
 
+// 처음 화면 출력
+drawLocations();
+
+// 검색
 search.addEventListener("input", () => {
   const keyword = search.value.trim().toLowerCase();
 
   if (keyword === "") {
     result.style.display = "none";
     locationView.style.display = "grid";
-
     return;
   }
 
@@ -59,24 +55,21 @@ search.addEventListener("input", () => {
 
   if (filtered.length === 0) {
     result.innerHTML = `
-            <div class="result-item">
-                검색 결과가 없습니다.
-            </div>
-        `;
-
+      <div class="result-item">
+        검색 결과가 없습니다.
+      </div>
+    `;
     return;
   }
 
   result.innerHTML = filtered
     .map(
       (item) => `
-        <div class="result-item">
-            <div>📦 ${item.name}</div>
-            <div class="location">📍 ${item.location}</div>
-        </div>
+      <div class="result-item">
+        <div>📦 ${item.name}</div>
+        <div class="location">${item.location}</div>
+      </div>
     `,
     )
     .join("");
 });
-
-loadData();
